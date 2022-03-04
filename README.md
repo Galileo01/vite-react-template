@@ -353,11 +353,19 @@ extends: [
   },
   rules: {
     // 覆盖 eslint-config-airbnb里的配置
+    //  允许 在ts、tsx 中书写 jsx
     'react/jsx-filename-extension': [
       2,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ], //  允许 在ts、tsx 中书写 jsx
-    'react/function-component-definition': [0], // 关闭 对于 函数式组件 声明方式(箭头函数 or 函数声明)的 校验
+    ],
+      // 修改 对于 函数式组件 声明方式(箭头函数 or 函数声明)的 校验
+     'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: ['arrow-function', 'function-declaration'],
+        unnamedComponents: ['arrow-function'],
+      },
+    ],
   },
     ...
 ```
@@ -410,7 +418,6 @@ npm i husky -D
 - 在 package.json 中添加脚本 prepare :
 
 ```json
-
 "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -541,4 +548,31 @@ plugins: [
 
 ### 解决 Vite 里路径别名引用没有类型等提示
 
-待补充
+配置了路径别名后，虽然可以让 vite 正确的导入资源，但是发现在书写 路径的时候 vscode 并不能正确的提示，导入之后对应的 ts 类型也无法识别
+
+#### 配置 tsconfig.json
+
+需要配置 baseUrl,和 path
+
+```json
+"compilerOptions":{
+  "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+}
+```
+
+#### 修复
+
+正常情况下，这样就行不需要额外的配置。但我这里使用了 airbnb 的 代码风格，airbnb 对文件扩展有校验，在使用路径别进行导入时 ，遇到不能正确推导文件扩展名的问题，查询一番后 最简单的方法就是关闭 import/extensions 规则,希望后续有待修复(2022.03.04)
+
+```js
+rules:{
+   // 关闭 对文件扩展名的 校验
+    'import/extensions': 'off',
+}
+```
