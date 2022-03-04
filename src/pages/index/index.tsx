@@ -3,6 +3,8 @@ import * as React from 'react'
 import logo from '@/logo.svg'
 import './index.less'
 
+import Test from '@/components/test'
+
 const Index = () => {
   const [count, setCount] = React.useState(0)
   return (
@@ -18,6 +20,7 @@ const Index = () => {
             count is: {count}
           </button>
         </p>
+        <Test tag="=" />
         <p>
           Edit <code>Index.tsx</code> and save to test HMR updates.
         </p>

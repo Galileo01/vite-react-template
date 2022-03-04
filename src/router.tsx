@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 
 import type { RouteObject } from 'react-router-dom'
-import Index from './pages/index/index'
+import Index from './pages/index'
 
 // React.lazy 配合 import() 实现懒加载
 const About = React.lazy(() => import('./pages/about'))
