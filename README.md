@@ -4,8 +4,7 @@
 
 - react-router-dom 使用 v6
 - cssmodules 配置类名规则
-- 集成 antd 按需引入&开启行内 js
-- eslint + prettier
+- 集成 eslint + prettier + husky 等 进行代码风格和 commit 校验
 
 ## 模板
 
@@ -113,7 +112,7 @@ css: {
 
 Ps:这里使用[folder]-文件夹名而不是[name]-文件名 作为前缀的原因是：个人更喜欢把组件的文件分别命名为**index.module.less**和**index.tsx**
 
-<img src="/Users/bytedance/Library/Application Support/typora-user-images/image-20220303200607514.png" alt="image-20220303200607514" style="zoom:50%;" />
+![](https://www.helloimg.com/images/2022/03/04/GhxNSR.png)
 
 如果使用[name]-文件名的话 所有组件的类名前缀都会是“index.mudule_xxxx”，使用[folder]-文件夹名 可以很好的达到效果
 
@@ -314,7 +313,7 @@ npm i eslint-plugin-react-hooks -D
 }
 ```
 
-<img src="/Users/bytedance/Library/Application Support/typora-user-images/image-20220303211921803.png" alt="image-20220303211921803" style="zoom:50%;" />
+![Ghx0Zn.png](https://www.helloimg.com/images/2022/03/04/Ghx0Zn.png)
 
 ### 使用 airbnb 的规则 对 react 进行校验
 
@@ -411,6 +410,7 @@ npm i husky -D
 - 在 package.json 中添加脚本 prepare :
 
 ```json
+
 "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -493,7 +493,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 
 配置成功后，每次 git commit -m "xxx" 都会 进行响应的校验
 
-![image-20220303233027954](%20https://cdn.jsdelivr.net/gh/Galileo01/imgCloud@master/image-20220303233027954.png)
+![GhxQQz](https://www.helloimg.com/images/2022/03/04/GhxQQz.png)
 
 ## 其他
 
@@ -540,3 +540,5 @@ plugins: [
 ```
 
 ### 解决 Vite 里路径别名引用没有类型等提示
+
+待补充
